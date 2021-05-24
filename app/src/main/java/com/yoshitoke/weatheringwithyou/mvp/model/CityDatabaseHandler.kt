@@ -48,15 +48,12 @@ class CityDatabaseHandler(context: Context) : SQLiteOpenHelper(context, DBName, 
 
     }
 
-    fun AddCity(values: ContentValues): String {
+    fun AddCity(values: ContentValues): Boolean {
 
         var Msg: String = "error";
         val ID = sqlObj.insert(tableName, "", values)
 
-        if (ID > 0) {
-            Msg = "ok"
-        }
-        return Msg
+        return ID > 0
     }
 
     fun FetchCities(keyword: String): List<City> {
@@ -84,32 +81,22 @@ class CityDatabaseHandler(context: Context) : SQLiteOpenHelper(context, DBName, 
             } while (cur.moveToNext())
         }
 
-        return arraylist.reversed()
+        return arraylist
     }
 
-    fun UpdateCity(values: ContentValues, id: Int): String {
+    fun UpdateCity(values: ContentValues, id: Int): Boolean {
 
         val selectionArs = arrayOf(id.toString())
 
         val i = sqlObj.update(tableName, values, "id=?", selectionArs)
-        if (i > 0) {
-            return "ok";
-        } else {
-
-            return "error";
-        }
+        return i > 0
     }
 
-    fun RemoveCity(id: Int): String {
+    fun RemoveCity(id: Int): Boolean {
 
         val selectionArs = arrayOf(id.toString())
 
         val i = sqlObj.delete(tableName, "id=?", selectionArs)
-        if (i > 0) {
-            return "ok";
-        } else {
-
-            return "error";
-        }
+        return i > 0
     }
 }

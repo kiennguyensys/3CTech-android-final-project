@@ -14,6 +14,7 @@ import com.yoshitoke.weatheringwithyou.utils.kelvinToCelsius
 import com.yoshitoke.weatheringwithyou.utils.network.ICON_URL_POSTFIX_2X
 import com.yoshitoke.weatheringwithyou.utils.network.ICON_URL_PREFIX
 import com.yoshitoke.weatheringwithyou.utils.toCelsiusString
+import com.yoshitoke.weatheringwithyou.utils.toFirstCapString
 import com.yoshitoke.weatheringwithyou.utils.unixTimestampToString
 import kotlinx.android.synthetic.main.timeline_item.view.*
 
@@ -60,7 +61,7 @@ class DailyTimeLineAdapter(private val mFeedList: List<Daily>) : RecyclerView.Ad
                     .into(image);
 
             date.text = model.dateTime.unixTimestampToString(DATE_FORMAT)
-            message.text = model.weathers[0].description
+            message.text = model.weathers[0].description.toFirstCapString()
 
             val tempText = model.temperature.max.kelvinToCelsius().toCelsiusString() + " - " + model.temperature.min.kelvinToCelsius().toCelsiusString()
             temp.text = tempText

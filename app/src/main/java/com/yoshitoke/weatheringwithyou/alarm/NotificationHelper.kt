@@ -60,7 +60,7 @@ object NotificationHelper {
 
         val channelId = "${context.packageName}-${context.getString(R.string.app_name)}"
         val notificationBuilder = NotificationCompat.Builder(context, channelId).apply {
-            setSmallIcon(android.R.drawable.ic_btn_speak_now)
+            setSmallIcon(R.drawable.ic_baseline_wb_sunny_24)
             setContentTitle(title)
             setContentText(message)
             setAutoCancel(autoCancel)

@@ -10,6 +10,8 @@ import com.yoshitoke.weatheringwithyou.alarm.AlarmData
 import com.yoshitoke.weatheringwithyou.mvp.AlarmContract
 import com.yoshitoke.weatheringwithyou.mvp.presenter.AlarmPresenter
 import kotlinx.android.synthetic.main.fragment_alarm_result.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AlarmResultFragment(private val presenter: AlarmPresenter) : Fragment(), AlarmContract.View.FinalResultView{
 
@@ -21,6 +23,8 @@ class AlarmResultFragment(private val presenter: AlarmPresenter) : Fragment(), A
         }
     }
 
+    private val dateFormat = SimpleDateFormat("h:mm a",Locale.getDefault())
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -30,20 +34,24 @@ class AlarmResultFragment(private val presenter: AlarmPresenter) : Fragment(), A
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        presenter.setResultFragmentView(this)
+        presenter.setResultView(this)
         edit_btn.setOnClickListener{
-            presenter.onEditedPressed()
+            presenter.switchToFirstPage()
         }
     }
 
     override fun onAlarmSet(alarmData: AlarmData) {
-        val hourText = "Hour: " + alarmData.hour.toString()
-        val minuteText = "Minute: " + alarmData.minute.toString()
-        val daysText = "Every: " + alarmData.days.toString()
+        val date = Calendar.getInstance()
+        date.set(Calendar.HOUR_OF_DAY, alarmData.hour as Int)
+        date.set(Calendar.MINUTE, alarmData.minute as Int)
+        textViewTime.text = dateFormat.format(date.time).toLowerCase(Locale.ROOT)
 
-        tv_hours.text = hourText
-        tv_minute.text = minuteText
-        tv_days.text = daysText
+        var daysText = alarmData.days.toString()
+        daysText = daysText.replace("[", "")
+        daysText = daysText.replace("]", "")
+        daysText = daysText.replace(",", " ·")
+        daysText = daysText.replace("null", "")
+        textViewDays.text = daysText
     }
 
 }

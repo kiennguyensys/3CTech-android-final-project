@@ -34,7 +34,7 @@ class AlarmWelcomeFragment(private val presenter: AlarmPresenter) : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         start_btn.setOnClickListener {
-            presenter.onNextButtonPressed()
+            presenter.nextPage()
         }
     }
 

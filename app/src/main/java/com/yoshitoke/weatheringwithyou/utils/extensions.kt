@@ -1,8 +1,12 @@
 package com.yoshitoke.weatheringwithyou.utils
 
+import android.app.Activity
+import android.content.Context
+import android.content.pm.PackageManager
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 fun Int.unixTimestampToString(format: String) : String {
@@ -37,4 +41,8 @@ fun Int.toPercentageString() : String {
 
 fun Double.toVelocityString() : String {
     return "$this m/s"
+}
+
+fun String.toFirstCapString() : String {
+    return this.substring(0, 1).toUpperCase(Locale.ROOT) + this.substring(1)
 }

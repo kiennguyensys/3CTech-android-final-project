@@ -81,6 +81,7 @@ class MainPresenter(
 
     private fun onWeatherResponse(data: WeatherInfo) {
         mainView?.showWeatherInfo(data)
+        mainView?.hideProgressBar()
     }
 
     private fun onError(error: String?) {

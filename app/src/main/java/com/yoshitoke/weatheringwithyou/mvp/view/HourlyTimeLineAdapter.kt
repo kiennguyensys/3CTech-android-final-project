@@ -9,14 +9,11 @@ import com.github.vipulasri.timelineview.TimelineView
 import com.yoshitoke.weatheringwithyou.R
 import com.yoshitoke.weatheringwithyou.mvp.model.DataClass.Daily
 import com.yoshitoke.weatheringwithyou.mvp.model.DataClass.Hourly
-import com.yoshitoke.weatheringwithyou.utils.DateConstant
+import com.yoshitoke.weatheringwithyou.utils.*
 import com.yoshitoke.weatheringwithyou.utils.DateConstant.Companion.HOUR_FORMAT
-import com.yoshitoke.weatheringwithyou.utils.kelvinToCelsius
 import com.yoshitoke.weatheringwithyou.utils.network.ICON_URL_POSTFIX_2X
 import com.yoshitoke.weatheringwithyou.utils.network.ICON_URL_POSTFIX_4X
 import com.yoshitoke.weatheringwithyou.utils.network.ICON_URL_PREFIX
-import com.yoshitoke.weatheringwithyou.utils.toCelsiusString
-import com.yoshitoke.weatheringwithyou.utils.unixTimestampToString
 import kotlinx.android.synthetic.main.timeline_item.view.*
 
 class HourlyTimeLineAdapter(private val mFeedList: List<Hourly>) : RecyclerView.Adapter<HourlyTimeLineAdapter.TimeLineViewHolder>() {
@@ -58,7 +55,7 @@ class HourlyTimeLineAdapter(private val mFeedList: List<Hourly>) : RecyclerView.
             val url: String
 
             date.text = model.dateTime.unixTimestampToString(HOUR_FORMAT)
-            message.text = model.weathers[0].description
+            message.text = model.weathers[0].description.toFirstCapString()
             temp.text = model.temperature.kelvinToCelsius().toCelsiusString()
 
             if (isFirstPosition) {

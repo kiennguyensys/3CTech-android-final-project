@@ -4,24 +4,15 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import com.google.gson.Gson
 import com.yoshitoke.weatheringwithyou.R
 import java.util.*
 
 object AlarmScheduler {
 
-    /**
-     * Schedules all the alarms for [AlarmData].
-     *
-     * @param context      current application context
-     * @param alarmData AlarmData to use for the alarm
-     */
-//    fun scheduleAlarmsForData(context: Context) {
-//        val alarmDataList = DataUtils.loadUnAdministeredReminders()
-//        for (alarmData in alarmDataList) {
-//            AlarmScheduler.scheduleAlarmsForReminder(context, alarmData)
-//        }
-//    }
+    const val INTENT_ALARM_EXTRA = "alarm"
+    const val INTENT_ID_EXTRA = "id"
 
     fun scheduleAlarmsForReminder(context: Context, alarmData: AlarmData) {
 
@@ -31,14 +22,10 @@ object AlarmScheduler {
         // Schedule the alarms based on the days to administer the medicine
         val days = context.resources.getStringArray(R.array.days)
         if (alarmData.days != null) {
-            for (index in alarmData.days!!.indices) {
-
-                val day = alarmData.days!![index]
+            for (day in alarmData.days as List<String>) {
                 if (day != null) {
-
                     // get the PendingIntent for the alarm
                     val alarmIntent = createPendingIntent(context, alarmData, day)
-
                     // schedule the alarm
                     val dayOfWeek = getDayOfWeek(days, day)
                     scheduleAlarm(alarmData, dayOfWeek, alarmIntent, alarmMgr)
@@ -89,7 +76,7 @@ object AlarmScheduler {
         val intent = Intent(context.applicationContext, AlarmReceiver::class.java).apply {
             action = context.getString(R.string.action_notify_weather_alert)
             type = "$day-${alarmData.weatherTypes}"
-            putExtra("alarm", Gson().toJson(alarmData))
+            putExtra(INTENT_ALARM_EXTRA, Gson().toJson(alarmData))
         }
 
         return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
@@ -134,15 +121,13 @@ object AlarmScheduler {
     fun removeAlarmsForReminder(context: Context, alarmData: AlarmData) {
         val intent = Intent(context.applicationContext, AlarmReceiver::class.java)
         intent.action = context.getString(R.string.action_notify_weather_alert)
-        intent.putExtra("id", alarmData.id)
+        intent.putExtra(INTENT_ID_EXTRA, alarmData.id)
 
         // type must be unique so Intent.filterEquals passes the check to make distinct PendingIntents
         // Schedule the alarms based on the days to administer the medicine
         if (alarmData.days != null) {
-            for (i in alarmData.days!!.indices) {
-                val day = alarmData.days!![i]
-
-                if (day != null) {
+            for (day in alarmData.days as List<String>) {
+                if(day != null) {
                     val type = String.format(Locale.getDefault(), "%s-%s", day, alarmData.weatherTypes)
 
                     intent.type = type

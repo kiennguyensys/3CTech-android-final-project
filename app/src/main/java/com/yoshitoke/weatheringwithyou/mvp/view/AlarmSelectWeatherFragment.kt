@@ -37,7 +37,7 @@ class AlarmSelectWeatherFragment(private val presenter: AlarmPresenter) : Fragme
 
         save_btn.setOnClickListener{
             onSave()
-            presenter.onNextButtonPressed()
+            presenter.nextPage()
         }
     }
 
@@ -55,7 +55,7 @@ class AlarmSelectWeatherFragment(private val presenter: AlarmPresenter) : Fragme
     }
 
     private fun onSave() {
-        presenter.onSelectedWeatherType(checkedList)
+        presenter.updateWeatherType(checkedList)
     }
 
 }

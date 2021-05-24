@@ -1,5 +1,6 @@
 package com.yoshitoke.weatheringwithyou.mvp
 
+import android.location.Location
 import com.yoshitoke.weatheringwithyou.alarm.AlarmData
 import com.yoshitoke.weatheringwithyou.mvp.presenter.BasePresenter
 
@@ -12,25 +13,32 @@ interface AlarmContract {
         fun onNextViewTransition()
 
         fun onSpecificViewTransition(position: Int)
+
+        fun requestLocationPermission()
+
     }
 
     interface Presenter: BasePresenter {
 
-        fun onSelectedTime(hourOfDay: Int, minute: Int)
+        fun updateTime(hourOfDay: Int, minute: Int)
 
-        fun onSelectedDaysOfWeek(days: List<String>)
+        fun updateDaysOfWeek(days: List<String>)
 
-        fun onSelectedWeatherType(checkedList: List<String>)
+        fun updateWeatherType(checkedList: List<String>)
 
-        fun onConfirmSetting()
+        fun confirmSetting()
 
-        fun onNextButtonPressed()
+        fun nextPage()
 
         fun checkPreviousSetting()
 
-        fun onEditedPressed()
+        fun switchToFirstPage()
 
-        fun setResultFragmentView(fragment: View.FinalResultView)
+        fun setResultView(view: View.FinalResultView)
+
+        fun requestLocationPermission()
+
+        fun updateLocation(location: Location)
 
     }
 }

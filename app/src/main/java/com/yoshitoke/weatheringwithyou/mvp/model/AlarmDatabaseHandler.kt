@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.database.sqlite.SQLiteQueryBuilder
 import android.provider.BaseColumns
+import android.util.Log
 import com.yoshitoke.weatheringwithyou.alarm.AlarmData
 import com.yoshitoke.weatheringwithyou.mvp.model.DataClass.City
 
@@ -43,26 +44,32 @@ class AlarmDatabaseHandler(context: Context) : SQLiteOpenHelper(context, DBName,
             val stringBuilder: StringBuilder
             if (alarmData.days != null) {
                 stringBuilder = StringBuilder()
-                for (i in alarmData.days!!.indices) {
-                    if (alarmData.days!![i] == null) {
-                        continue
-                    }
-                    stringBuilder.append(alarmData.days!![i])
-                    if (i < alarmData.days!!.size - 1) {
-                        stringBuilder.append("-")
+
+                alarmData.days?.forEachIndexed { index, day ->
+                    if (day != null) {
+                        stringBuilder.append(day)
+                        if (index - 1 < alarmData.days?.size as Int) {
+                            stringBuilder.append("-")
+                        }
                     }
                 }
+
                 put(ALARM_DAYS, stringBuilder.toString())
             }
+
             val typeStringBuilder: StringBuilder
             if (alarmData.weatherTypes != null) {
                 typeStringBuilder = StringBuilder()
-                for (i in alarmData.weatherTypes!!.indices) {
-                    typeStringBuilder.append(alarmData.weatherTypes!![i])
-                    if (i < alarmData.weatherTypes!!.size - 1) {
-                        typeStringBuilder.append("-")
+
+                alarmData.weatherTypes?.forEachIndexed { index, weather ->
+                    if (weather != null) {
+                        typeStringBuilder.append(weather)
+                        if (index - 1 < alarmData.weatherTypes?.size as Int) {
+                            typeStringBuilder.append("-")
+                        }
                     }
                 }
+
                 put(ALARM_WEATHER_TYPE, typeStringBuilder.toString())
             }
             put(ALARM_ADMINISTERED, if (alarmData.administered) 1 else 0)
@@ -103,7 +110,7 @@ class AlarmDatabaseHandler(context: Context) : SQLiteOpenHelper(context, DBName,
 
     override fun onUpgrade(sqlite: SQLiteDatabase?, p1: Int, p2: Int) {
 
-        sqlite?.execSQL("Drop table IF EXISTS " + tableName)
+        sqlite?.execSQL("DROP TABLE IF EXISTS " + tableName)
         onCreate(sqlite)
 
     }
@@ -135,28 +142,19 @@ class AlarmDatabaseHandler(context: Context) : SQLiteOpenHelper(context, DBName,
         return alarms
     }
 
-    fun updateAlarm(alarmData: AlarmData): String {
+    fun updateAlarm(alarmData: AlarmData): Boolean {
         val selectionArs = arrayOf(alarmData.id.toString())
         val contentValues = createContentValues(alarmData)
 
         val i = sqlObj.update(tableName, contentValues, "id=?", selectionArs)
-        if (i > 0) {
-            return "ok";
-        } else {
-            return "error";
-        }
+        return i > 0
     }
 
-    fun removeAlarm(id: Int): String {
+    fun removeAlarm(id: Int): Boolean {
 
         val selectionArs = arrayOf(id.toString())
 
         val i = sqlObj.delete(tableName, "id=?", selectionArs)
-        if (i > 0) {
-            return "ok";
-        } else {
-
-            return "error";
-        }
+        return i > 0
     }
 }

@@ -1,6 +1,7 @@
 package com.yoshitoke.weatheringwithyou.mvp.presenter
 
 import android.content.Context
+import android.location.Location
 import android.os.Handler
 import android.util.Log
 import com.yoshitoke.weatheringwithyou.alarm.AlarmData
@@ -21,32 +22,30 @@ class AlarmPresenter(
     var alarmData: AlarmData? = null
     var finalResultView: AlarmContract.View.FinalResultView? = null
 
-    override fun destroy() {
-        TODO("Not yet implemented")
-    }
+    override fun destroy() = Unit
 
-    override fun onSelectedDaysOfWeek(days: List<String>) {
+    override fun updateDaysOfWeek(days: List<String>) {
         mDays = days
     }
 
-    override fun onSelectedTime(hourOfDay: Int, minute: Int) {
+    override fun updateTime(hourOfDay: Int, minute: Int) {
         mHour = hourOfDay
         mMinute = minute
     }
 
-    override fun onSelectedWeatherType(checkedList: List<String>) {
+    override fun updateWeatherType(checkedList: List<String>) {
         mWeatherList = checkedList
     }
 
-    override fun onConfirmSetting() {
+    override fun confirmSetting() {
         val db = AlarmDatabaseHandler(context)
 
         if(alarmData == null) {
-            alarmData = AlarmData(0, mWeatherList, mHour, mMinute, mDays)
+            alarmData = AlarmData(1, mWeatherList, mHour, mMinute, mDays)
             db.createAlarm(alarmData as AlarmData)
             AlarmScheduler.scheduleAlarmsForReminder(context, alarmData as AlarmData)
         } else {
-            alarmData = AlarmData(0, mWeatherList, mHour, mMinute, mDays)
+            alarmData = AlarmData(1, mWeatherList, mHour, mMinute, mDays)
             db.updateAlarm(alarmData as AlarmData)
             AlarmScheduler.updateAlarmsForReminder(context, alarmData as AlarmData)
         }
@@ -68,15 +67,23 @@ class AlarmPresenter(
         }
     }
 
-    override fun onEditedPressed() {
+    override fun switchToFirstPage() {
         mainView?.onSpecificViewTransition(0)
     }
 
-    override fun onNextButtonPressed() {
+    override fun nextPage() {
         mainView?.onNextViewTransition()
     }
 
-    override fun setResultFragmentView(fragment: AlarmContract.View.FinalResultView) {
-        finalResultView = fragment
+    override fun setResultView(view: AlarmContract.View.FinalResultView) {
+        finalResultView = view
+    }
+
+    override fun requestLocationPermission() {
+        mainView?.requestLocationPermission()
+    }
+
+    override fun updateLocation(location: Location) {
+        TODO("update to SharedPreferences with CURRENT_GPS KEY")
     }
 }

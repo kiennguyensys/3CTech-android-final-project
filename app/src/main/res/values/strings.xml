@@ -3,7 +3,7 @@
     <string name="map_choosed_place">Choosed Place</string>
     <string name="daily_forecast_tab">DAILY FORECAST</string>
     <string name="additional_info_tab">ADDITIONAL</string>
-    <string name="map_btn_text">Confirm</string>
+    <string name="map_btn_text">Add City</string>
     <string name="tab_bottom_btn_text">More</string>
     <string name="sunrise">Sunrise</string>
     <string name="sunset">Sunset</string>
@@ -14,12 +14,22 @@
     <string name="alarm_edit_title">WeatheringWithYou will let you know how’s the weather like when you want with push notification</string>
     <string name="alarm_select_weather_title">What kind of weather notice would you like to receive?</string>
     <string name="alarm_set_time_title">Now choose the time you want to be notified</string>
+    <string name="alarm_setting_text">Alarm</string>
+    <string name="alarm_start_btn">Start</string>
+    <string name="alarm_edit_btn">Edit</string>
+    <string name="alarm_next_btn">Next</string>
     <string name="alarm_finish_title">Alarm set with the weather you have chosen</string>
     <string name="action_notify_weather_alert">com.yoshitoke.weatheringwithyou.action.WEATHER_ALERT</string>
+    <string name="action_boot_completed">android.intent.action.BOOT_COMPLETED</string>
+    <string name="hour">Hour</string>
+    <string name="Minute">Minute</string>
     <string name="days">Day(s)</string>
     <string name="rain">Rain</string>
     <string name="thunderstorm">Thunderstorm</string>
     <string name="swelter">Swelter</string>
+    <string name="notify_weather_alert_title">Weather Alert</string>
+    <string name="notify_weather_alert_first_body">Current Weather Outside: </string>
+    <string name="notify_weather_alert_second_body">You may need to bring necessary things</string>
 
     <string-array name="days">
         <item>Sunday</item>

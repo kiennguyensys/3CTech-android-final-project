@@ -34,13 +34,13 @@ class AlarmSetTimeFragment(private val presenter: AlarmPresenter) : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         timePicker_hours.setIs24HourView(true)
 
-        timePicker_hours.setOnTimeChangedListener(OnTimeChangedListener { view, hourOfDay, minute -> presenter.onSelectedTime(hourOfDay, minute) })
+        timePicker_hours.setOnTimeChangedListener(OnTimeChangedListener { view, hourOfDay, minute -> presenter.updateTime(hourOfDay, minute) })
 
         buildCheckBoxes()
 
         next_btn.setOnClickListener {
             onSave()
-            presenter.onNextButtonPressed()
+            presenter.nextPage()
         }
     }
 
@@ -66,8 +66,8 @@ class AlarmSetTimeFragment(private val presenter: AlarmPresenter) : Fragment(){
             }
         }
 
-        presenter.onSelectedDaysOfWeek(daysItems.toList())
-        presenter.onConfirmSetting()
+        presenter.updateDaysOfWeek(daysItems.toList())
+        presenter.confirmSetting()
     }
 
 }

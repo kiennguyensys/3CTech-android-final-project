@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.yoshitoke.weatheringwithyou.mvp.presenter.AlarmPresenter
 
-class AlarmPagerAdapter(activity: AppCompatActivity, private val itemsCount: Int, private val presenter: AlarmPresenter) : FragmentStateAdapter(activity) {
+class AlarmPagerAdapter(activity: AppCompatActivity, private val itemCount: Int, private val presenter: AlarmPresenter) : FragmentStateAdapter(activity) {
     override fun getItemCount(): Int {
-        return itemsCount
+        return itemCount
     }
 
     override fun createFragment(position: Int): Fragment {

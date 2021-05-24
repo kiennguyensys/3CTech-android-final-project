@@ -11,6 +11,7 @@ interface Contract {
 
         fun showWeatherInfo(data: WeatherInfo)
 
+        fun hideProgressBar()
     }
 
     interface Presenter: BasePresenter {

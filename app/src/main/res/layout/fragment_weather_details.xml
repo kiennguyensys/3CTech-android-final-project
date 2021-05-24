@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_16"
         android:text="@string/sunrise"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,6 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_28"
         android:layout_marginTop="@dimen/dp_12"
+        android:textColor="@color/white"
         android:textSize="@dimen/sp_16"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview1" />
@@ -34,6 +36,7 @@
         android:layout_marginTop="@dimen/dp_12"
         android:layout_marginEnd="@dimen/dp_36"
         android:textSize="@dimen/sp_16"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
@@ -44,6 +47,7 @@
         android:layout_marginStart="@dimen/dp_28"
         android:layout_marginTop="@dimen/dp_108"
         android:text="@string/uvIndex"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -54,6 +58,7 @@
         android:layout_marginTop="@dimen/dp_108"
         android:layout_marginEnd="@dimen/dp_36"
         android:text="@string/humidity"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -64,6 +69,7 @@
         android:layout_marginStart="@dimen/dp_28"
         android:layout_marginTop="@dimen/dp_8"
         android:textSize="@dimen/sp_16"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -75,6 +81,7 @@
         android:layout_marginStart="@dimen/dp_28"
         android:layout_marginTop="@dimen/dp_192"
         android:text="@string/wind_speed"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -85,6 +92,7 @@
         android:layout_marginTop="@dimen/dp_192"
         android:layout_marginEnd="@dimen/dp_36"
         android:text="@string/feels_like"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -95,6 +103,7 @@
         android:layout_marginStart="@dimen/dp_28"
         android:layout_marginTop="@dimen/dp_8"
         android:textSize="@dimen/sp_16"
+        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -105,6 +114,7 @@
         android:layout_marginTop="@dimen/dp_8"
         android:layout_marginEnd="@dimen/dp_36"
         android:textSize="@dimen/sp_16"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
@@ -115,6 +125,7 @@
         android:layout_marginTop="@dimen/dp_16"
         android:layout_marginEnd="@dimen/dp_36"
         android:text="@string/sunset"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -125,6 +136,7 @@
         android:layout_marginTop="@dimen/dp_8"
         android:layout_marginEnd="@dimen/dp_36"
         android:textSize="@dimen/sp_16"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 

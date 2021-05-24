@@ -4,10 +4,8 @@ import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.AdapterView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationManagerCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,10 +23,9 @@ import com.yoshitoke.weatheringwithyou.mvp.model.DataClass.City
 import com.yoshitoke.weatheringwithyou.mvp.model.DataClass.Hourly
 import com.yoshitoke.weatheringwithyou.mvp.model.DataClass.WeatherInfo
 import com.yoshitoke.weatheringwithyou.mvp.presenter.MainPresenter
-import com.yoshitoke.weatheringwithyou.utils.DateConstant.Companion.DATE_TIME_FORMAT
 import com.yoshitoke.weatheringwithyou.utils.kelvinToCelsius
 import com.yoshitoke.weatheringwithyou.utils.toCelsiusString
-import com.yoshitoke.weatheringwithyou.utils.unixTimestampToString
+import com.yoshitoke.weatheringwithyou.utils.toFirstCapString
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.bottom_tabs_layout.*
 import kotlinx.android.synthetic.main.current_conditions_layout.*
@@ -80,11 +77,15 @@ class MainActivity : AppCompatActivity(), Contract.View, AdapterView.OnItemSelec
         val tempText = data.current.temperature.kelvinToCelsius().toCelsiusString()
         tv_temperature.setText(tempText)
 
-        tv_dateTime.setText(data.current.dateTime.unixTimestampToString(DATE_TIME_FORMAT))
-        tv_condition.setText(data.current.weathers[0].description)
+        tv_dateTime.setText("Now")
+        tv_condition.setText(data.current.weathers[0].description.toFirstCapString())
 
         showHourlyForecast(data.hours)
         initBottomTabs(data)
+    }
+
+    override fun hideProgressBar() {
+        progressBar.visibility = View.GONE
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
